@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import {
   VerticalTimeline,
   VerticalTimelineElement,
@@ -12,7 +12,7 @@ import { experiences } from "../constants";
 import { SectionWrapper } from "../hoc";
 import { textVariant } from "../utils/motion";
 
-const ExperienceCard = ({ experience }) => {
+const ExperienceCard = memo(({ experience }) => {
   return (
     <VerticalTimelineElement
       contentStyle={{
@@ -54,7 +54,7 @@ const ExperienceCard = ({ experience }) => {
       </ul>
     </VerticalTimelineElement>
   );
-};
+});
 
 const Experience = () => {
   return (

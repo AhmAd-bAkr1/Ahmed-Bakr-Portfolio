@@ -17,9 +17,8 @@ import nodejs from "./tech/nodejs.png";
 import reactjs from "./tech/reactjs.png";
 import redux from "./tech/redux.png";
 import tailwind from "./tech/tailwind.png";
-import threejs from "./tech/threejs.svg";
  
-import ToDoList from "./company/ToDoList.png";
+import ToDoList from "./company/ToDoList.gif";
 import Cart from "./CartApp.png"; 
 import Quiz from "./QuizApp.png";
 
@@ -44,7 +43,6 @@ export {
   reactjs,
   redux,
   tailwind,
-  threejs,
   ToDoList,
   CRUD,
   Cart,

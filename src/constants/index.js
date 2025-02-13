@@ -12,7 +12,6 @@ import {
   figma,
   bootstrap,
   ToDoList,
-  threejs,
   Cart,
   CRUD,
   Quiz
@@ -76,10 +75,6 @@ const technologies = [
   {
     name: "Bootstrap",
     icon: bootstrap, 
-  },
-  {
-    name: "Three JS",
-    icon: threejs,
   },
   {
     name: "git",
