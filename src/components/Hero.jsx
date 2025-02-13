@@ -34,7 +34,7 @@ const Hero = () => {
             Hi, I'm <span className='text-[#915EFF]'>Ahmad Bakr</span>
           </h1>
           <p className={`${styles.heroSubText} mt-2 text-white-100`}>
-          A Front-End Developer specializing in React JS. I create interactive and responsive user interfaces, focusing on delivering seamless web experiences.
+          Front-End Developer | React JS. I create interactive and responsive user interfaces.
           </p>
         </div>
       </div>

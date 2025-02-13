@@ -1,7 +1,6 @@
 import { BrowserRouter } from "react-router-dom";
 import React, { Suspense, lazy ,useEffect } from "react";
 import { motion, useScroll} from "framer-motion";
-// import Cursor from "./utils/Curser"; // استيراد المكون
 
 
 // استخدام Dynamic Imports لتحميل المكونات فقط عند الحاجة

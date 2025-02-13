@@ -1,28 +1,28 @@
 import logo from "./logo.svg";
-import backend from "./backend.png";
-import creator from "./creator.png";
-import mobile from "./mobile.png";
-import web from "./web.png";
-import github from "./github.png";
+import backend from "./backend.webp";
+import creator from "./creator.webp";
+import mobile from "./mobile.webp";
+import web from "./web.webp";
+import github from "./github.webp";
 import menu from "./menu.svg";
 import close from "./close.svg";  
 
-import css from "./tech/css.png";
-import bootstrap from "./tech/bootstrap.png";
-import figma from "./tech/figma.png";
-import git from "./tech/git.png";
-import html from "./tech/html.png";
-import javascript from "./tech/javascript.png";
-import nodejs from "./tech/nodejs.png";
-import reactjs from "./tech/reactjs.png";
-import redux from "./tech/redux.png";
-import tailwind from "./tech/tailwind.png";
+import css from "./tech/css.webp";
+import bootstrap from "./tech/bootstrap.webp";
+import figma from "./tech/figma.webp";
+import git from "./tech/git.webp";
+import html from "./tech/html.webp";
+import javascript from "./tech/javascript.webp";
+import nodejs from "./tech/nodejs.webp";
+import reactjs from "./tech/reactjs.webp";
+import redux from "./tech/redux.webp";
+import tailwind from "./tech/tailwind.webp";
  
-import ToDoList from "./company/ToDoList.gif";
-import Cart from "./CartApp.png"; 
-import Quiz from "./QuizApp.png";
+import ToDoList from "./company/ToDoList.webp";
+import Cart from "./CartApp.webp"; 
+import Quiz from "./QuizApp.webp";
 
-import CRUD from "./CrudApp.png";  
+import CRUD from "./CrudApp.webp";  
 
 export {
   logo,
