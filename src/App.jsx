@@ -1,9 +1,7 @@
+import React, { Suspense, lazy, useState, useEffect } from 'react';
 import { BrowserRouter } from "react-router-dom";
-import React, { Suspense, lazy ,useEffect } from "react";
-import { motion, useScroll} from "framer-motion";
+import Loader from './Loader/Loader'; // استيراد مكون Loader
 
-
-// استخدام Dynamic Imports لتحميل المكونات فقط عند الحاجة
 const About = lazy(() => import("./components/About"));
 const Contact = lazy(() => import("./components/Contact"));
 const Experience = lazy(() => import("./components/Experience"));
@@ -14,78 +12,56 @@ const Tech = lazy(() => import("./components/Tech"));
 const Works = lazy(() => import("./components/Works"));
 
 const App = () => {
-  const { scrollYProgress } = useScroll();
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    // التأكد من تحديث شريط التمرير عند التحميل
-    const updateScrollProgress = () => {
-      scrollYProgress.set(0); // أو قيمة معينة إذا كنت تحتاج أن تبدأ من مكان آخر
-    };
-    updateScrollProgress();
+    // التحقق من تحميل الصفحة بالكامل
+    const handleLoad = () => setLoading(false);
 
-    // تحديث عند التحميل الأولي
-    window.addEventListener("load", updateScrollProgress);
+    window.addEventListener("load", handleLoad);
 
+    // تنظيف الحدث عند الخروج
     return () => {
-      window.removeEventListener("load", updateScrollProgress);
+      window.removeEventListener("load", handleLoad);
     };
-  }, [scrollYProgress]);
+  }, []);
 
   return (
-       <>
-       <motion.div
-        id="scroll-indicator"
-        style={{
-          scaleX: scrollYProgress, // هذا سيتحكم في العرض بناءً على التمرير
-          position: "fixed",
-          top: 0,
-          left: 0,
-          right: 0,
-          height: 5,
-          originX: 0, // يبدأ من اليسار
-          backgroundColor: "#ff0088",
-          zIndex: 100,
-        }}
-      />
     <BrowserRouter>
-
       <div className="relative z-0 bg-primary">
+        {/* إظهار الـ Loader حتى اكتمال التحميل */}
+        {loading && <Loader />}
+        
         <div className="bg-hero-pattern bg-cover bg-no-repeat bg-center">
-          {/* استخدم Suspense لتحميل Navbar و Hero بشكل ديناميكي */}
-          <Suspense fallback={<div>جارٍ تحميل الشريط العلوي...</div>}>
+          {/* استخدم Suspense مع Loader كـ fallback */}
+          <Suspense fallback={<Loader />}>
             <Navbar />
           </Suspense>
-          <Suspense fallback={<div>جارٍ تحميل البطل...</div>}>
+          <Suspense fallback={<Loader />}>
             <Hero />
           </Suspense>
         </div>
 
-        {/* تحميل المكونات الأخرى ديناميكيًا */}
-        <Suspense fallback={<div>جارٍ تحميل About...</div>}>
+        <Suspense fallback={<Loader />}>
           <About />
         </Suspense>
-        <Suspense fallback={<div>جارٍ تحميل Experience...</div>}>
+        <Suspense fallback={<Loader />}>
           <Experience />
         </Suspense>
-        <Suspense fallback={<div>جارٍ تحميل Tech...</div>}>
+        <Suspense fallback={<Loader />}>
           <Tech />
         </Suspense>
-        <Suspense fallback={<div>جارٍ تحميل Works...</div>}>
+        <Suspense fallback={<Loader />}>
           <Works />
         </Suspense>
-        <Suspense fallback={<div>جارٍ تحميل Feedbacks...</div>}>
+        <Suspense fallback={<Loader />}>
           <Feedbacks />
         </Suspense>
-
-        <div className="relative z-0">
-          <Suspense fallback={<div>جارٍ تحميل Contact...</div>}>
-            <Contact />
-          </Suspense>
-        </div>
-    {/* <Cursor /> إضافة المؤشر المخصص */}
-
+        <Suspense fallback={<Loader />}>
+          <Contact />
+        </Suspense>
       </div>
     </BrowserRouter>
-    </>
   );
 };
 
