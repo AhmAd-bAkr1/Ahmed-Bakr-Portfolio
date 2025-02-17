@@ -20,16 +20,6 @@ import animationData from './assets/Animation - 1739821623597.json'; // تأكد
 const App = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [loaderVisible, setLoaderVisible] = useState(true); 
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768); // التحقق من نوع الجهاز
-
-  // ضبط قيمة isMobile عند تغيير حجم الشاشة
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768); 
-    };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   useEffect(() => {
     // إخفاء الـ Loader بعد ثانية واحدة من تحميل الصفحة
@@ -47,7 +37,7 @@ const App = () => {
       clearTimeout(timer);
       window.removeEventListener("load", handleLoad);
     };
-  }, []);
+  }, []);  // يمكن ترك المصفوفة فارغة حتى يتم تنفيذ التأثير مرة واحدة فقط عند التحميل
 
   // إخفاء الـ Loader بعد تحميل البيانات
   if (!isLoaded || loaderVisible) {
