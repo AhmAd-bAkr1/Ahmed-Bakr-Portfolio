@@ -1,7 +1,10 @@
 import React, { Suspense, lazy, useState, useEffect } from 'react';
 import { BrowserRouter } from "react-router-dom";
-import Loader from './Loader/Loader'; // استيراد مكون Loader
+import Lottie from 'react-lottie-player'; // استيراد Lottie بشكل صحيح
+import './App.css'; 
+import Loader from './Loader/Loader'; 
 
+// المكونات المؤجلة باستخدام React.lazy
 const About = lazy(() => import("./components/About"));
 const Contact = lazy(() => import("./components/Contact"));
 const Experience = lazy(() => import("./components/Experience"));
@@ -11,56 +14,69 @@ const Navbar = lazy(() => import("./components/Navbar"));
 const Tech = lazy(() => import("./components/Tech"));
 const Works = lazy(() => import("./components/Works"));
 
+// تحميل ملف JSON للأنيميشن
+import animationData from './assets/Animation - 1739821623597.json'; // تأكد من المسار الصحيح للـ JSON
+
 const App = () => {
-  const [loading, setLoading] = useState(true);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [loaderVisible, setLoaderVisible] = useState(true); 
 
   useEffect(() => {
-    // التحقق من تحميل الصفحة بالكامل
-    const handleLoad = () => setLoading(false);
+    const timer = setTimeout(() => {
+      setLoaderVisible(false);
+    }, 1000);
+
+    const handleLoad = () => {
+      setIsLoaded(true);
+    };
 
     window.addEventListener("load", handleLoad);
 
-    // تنظيف الحدث عند الخروج
     return () => {
+      clearTimeout(timer);
       window.removeEventListener("load", handleLoad);
     };
   }, []);
 
+  if (!isLoaded || loaderVisible) {
+    return <Loader />;
+  }
+
   return (
     <BrowserRouter>
-      <div className="relative z-0 bg-primary">
-        {/* إظهار الـ Loader حتى اكتمال التحميل */}
-        {loading && <Loader />}
-        
-        <div className="bg-hero-pattern bg-cover bg-no-repeat bg-center">
-          {/* استخدم Suspense مع Loader كـ fallback */}
-          <Suspense fallback={<Loader />}>
-            <Navbar />
-          </Suspense>
-          <Suspense fallback={<Loader />}>
-            <Hero />
-          </Suspense>
+      {/* الأنيميشن يظهر فقط عندما يكون الـ Loader غير مرئي */}
+      {!loaderVisible && (
+        <div className="background-animation">
+          <Lottie
+            animationData={animationData} // استخدام animationData مباشرة
+            play
+            loop
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+            }}
+          />
         </div>
+      )}
 
-        <Suspense fallback={<Loader />}>
+      <Suspense fallback={<Loader />}>
+        <div className="relative z-0 ">
+          <div className="bg-hero-pattern bg-cover bg-no-repeat bg-center">
+            <Navbar />
+            <Hero />
+          </div>
+
           <About />
-        </Suspense>
-        <Suspense fallback={<Loader />}>
           <Experience />
-        </Suspense>
-        <Suspense fallback={<Loader />}>
           <Tech />
-        </Suspense>
-        <Suspense fallback={<Loader />}>
           <Works />
-        </Suspense>
-        <Suspense fallback={<Loader />}>
           <Feedbacks />
-        </Suspense>
-        <Suspense fallback={<Loader />}>
           <Contact />
-        </Suspense>
-      </div>
+        </div>
+      </Suspense>
     </BrowserRouter>
   );
 };

@@ -1,0 +1,27 @@
+/* إضافة هذا الـ CSS */
+.background-animation {
+    position: fixed; /* لتثبيت الخلفية */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh; /* تغطية الشاشة بالكامل */
+    z-index: -1; /* التأكد من أن الأنيميشن في الخلفية */
+    background-color: #00041C;
+  }
+  
+  .relative {
+    position: relative;
+    z-index: 1; /* تأكد من أن المحتوى يظهر فوق الأنيميشن */
+  }
+  
+  /* يمكنك إضافة بعض التنسيق الإضافي هنا */
+  .bg-primary {
+    background-color: #fff; /* أو أي لون ترغب به */
+  }
+  
+  /* إذا كنت بحاجة لتعديل مظهر المكونات */
+  .bg-hero-pattern {
+    background-size: cover;
+    background-position: center;
+  }
+  

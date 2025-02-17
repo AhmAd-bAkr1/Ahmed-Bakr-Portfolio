@@ -1,62 +1,75 @@
-/* Loader.css */
+/* الحاوية التي تحتوي على الـ Loader */
+.loader-container {
+  display: flex;
+  justify-content: center; /* لتحريك العنصر أفقيًا في المنتصف */
+  align-items: center; /* لتحريك العنصر عموديًا في المنتصف */
+  height: 100vh; /* لضمان أن الحاوية تأخذ كامل ارتفاع الصفحة */
+  position: fixed; /* يجعل الحاوية ثابتة على الصفحة */
+  top: 0;
+  left: 0;
+  width: 100%; /* تأخذ كامل عرض الصفحة */
+  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
+
+  
+}
+
+/* تخصيص الـ Loader نفسه */
 .loader {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); /* لجعل العنصر في المنتصف تماماً */
-    transform-origin: center center;
-    perspective: 1000px;
-    border-radius: 50%;
-    width: 48px;
-    height: 48px;
-    color: #fff;
-    z-index: 9999; /* لضمان أن الـ loader يظهر فوق كل العناصر */
+  width: 48px;
+  height: 48px;
+  margin: auto;
+  position: relative;
+}
+
+.loader:before {
+  content: '';
+  width: 48px;
+  height: 5px;
+  opacity: 0.25;
+  position: absolute;
+  top: 60px;
+  left: 0;
+  border-radius: 50%;
+  animation: shadow 0.5s linear infinite;
+}
+
+.loader:after {
+  content: '';
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  animation: bxSpin 0.5s linear infinite;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 4px;
+}
+
+/* الأنيميشن لدوران الـ Loader */
+@keyframes bxSpin {
+  17% {
+    border-bottom-right-radius: 3px;
   }
-  
-  .loader:before,
-  .loader:after {
-    content: '';
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: inherit;
-    height: inherit;
-    border-radius: 50%;
-    transform: rotateX(70deg);
-    animation: 1s spin linear infinite;
+  25% {
+    transform: translateY(9px) rotate(22.5deg);
   }
-  
-  .loader:after {
-    color: #FF3D00;
-    transform: rotateY(70deg);
-    animation-delay: .4s;
+  50% {
+    transform: translateY(18px) scale(1, .9) rotate(45deg);
+    border-bottom-right-radius: 40px;
   }
-  
-  @keyframes spin {
-    0%, 100% {
-      box-shadow: .2em 0px 0 0px currentcolor;
-    }
-    12% {
-      box-shadow: .2em .2em 0 0 currentcolor;
-    }
-    25% {
-      box-shadow: 0 .2em 0 0px currentcolor;
-    }
-    37% {
-      box-shadow: -.2em .2em 0 0 currentcolor;
-    }
-    50% {
-      box-shadow: -.2em 0 0 0 currentcolor;
-    }
-    62% {
-      box-shadow: -.2em -.2em 0 0 currentcolor;
-    }
-    75% {
-      box-shadow: 0px -.2em 0 0 currentcolor;
-    }
-    87% {
-      box-shadow: .2em -.2em 0 0 currentcolor;
-    }
+  75% {
+    transform: translateY(9px) rotate(67.5deg);
   }
-  
+  100% {
+    transform: translateY(0) rotate(90deg);
+  }
+}
+
+@keyframes shadow {
+  0%, 100% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.2, 1);
+  }
+}

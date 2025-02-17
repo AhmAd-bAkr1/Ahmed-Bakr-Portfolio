@@ -13,6 +13,9 @@
   color-scheme: dark;
   /* cursor: none */
 }
+body{
+  overflow-x: hidden;
+}
 
 .hash-span {
   margin-top: -100px;
