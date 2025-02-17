@@ -20,8 +20,19 @@ import animationData from './assets/Animation - 1739821623597.json'; // تأكد
 const App = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [loaderVisible, setLoaderVisible] = useState(true); 
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768); // التحقق من نوع الجهاز
+
+  // ضبط قيمة isMobile عند تغيير حجم الشاشة
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768); 
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
+    // إخفاء الـ Loader بعد ثانية واحدة من تحميل الصفحة
     const timer = setTimeout(() => {
       setLoaderVisible(false);
     }, 1000);
@@ -38,6 +49,7 @@ const App = () => {
     };
   }, []);
 
+  // إخفاء الـ Loader بعد تحميل البيانات
   if (!isLoaded || loaderVisible) {
     return <Loader />;
   }
@@ -48,7 +60,7 @@ const App = () => {
       {!loaderVisible && (
         <div className="background-animation">
           <Lottie
-            animationData={animationData} // استخدام animationData مباشرة
+            animationData={animationData}
             play
             loop
             style={{
@@ -57,13 +69,14 @@ const App = () => {
               left: 0,
               width: '100%',
               height: '100%',
+              zIndex: -1,  // التأكد من أن الأنيميشن في الخلفية
             }}
           />
         </div>
       )}
 
       <Suspense fallback={<Loader />}>
-        <div className="relative z-0 ">
+        <div className="relative z-0">
           <div className="bg-hero-pattern bg-cover bg-no-repeat bg-center">
             <Navbar />
             <Hero />
