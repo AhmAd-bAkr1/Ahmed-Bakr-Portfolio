@@ -19,27 +19,31 @@ import animationData from './assets/Animation - 1739821623597.json'; // تأكد
 
 const App = () => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const [loaderVisible, setLoaderVisible] = useState(true); 
+  const [loaderVisible, setLoaderVisible] = useState(true);
 
+  // إضافة تأثير لتحميل الصفحة وإخفاء الـ Loader بعد تحميل المحتوى
   useEffect(() => {
-    // إخفاء الـ Loader بعد ثانية واحدة من تحميل الصفحة
+    // تحديد الوقت الذي سيختفي فيه الـ Loader
     const timer = setTimeout(() => {
-      setLoaderVisible(false);
+      setLoaderVisible(false);  // إخفاء الـ Loader بعد 1 ثانية
     }, 1000);
 
+    // عندما يتم تحميل الصفحة بالكامل
     const handleLoad = () => {
       setIsLoaded(true);
+      setLoaderVisible(false); // إخفاء الـ Loader بمجرد تحميل الصفحة
     };
 
+    // إضافة مستمع لتحميل الصفحة
     window.addEventListener("load", handleLoad);
 
     return () => {
-      clearTimeout(timer);
-      window.removeEventListener("load", handleLoad);
+      clearTimeout(timer); // إلغاء التوقيت عند تدمير الكومبوننت
+      window.removeEventListener("load", handleLoad); // إزالة مستمع حدث التحميل
     };
-  }, []);  // يمكن ترك المصفوفة فارغة حتى يتم تنفيذ التأثير مرة واحدة فقط عند التحميل
+  }, []);
 
-  // إخفاء الـ Loader بعد تحميل البيانات
+  // إذا كانت الصفحة لم يتم تحميلها أو إذا كان الـ Loader لا يزال ظاهرًا، فسيتم إظهار الـ Loader
   if (!isLoaded || loaderVisible) {
     return <Loader />;
   }
